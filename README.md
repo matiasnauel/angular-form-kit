@@ -22,6 +22,11 @@ Sin embargo, el componente aún no está completamente desarrollado para ser reu
 
 Continuaré trabajando en la mejora de la reutilización de esta directiva para que pueda adaptarse a diferentes formatos y requisitos, permitiendo así su uso en una variedad más amplia de situaciones.
 
+### Caso 1
+
+1. El cliente quiere ver el formato con separadores de "-" como prefijo y sufijo pero en el servidor el campo cuit se almacena como un int.
+2. El cliente quiere ver el formato con separado de "-" como prefijo y sufijo pero en el servidor el campo cuit se almacenado como un string
+
 ## Validaciónes de formulario
 
 - **Validar campo para que acepte solo numeros**: solo permitan numeros, ya que hay casos donde no se puede utilizar el type number, si no type text pero hay que restrigir el uso de numeros para evitar enviar errores al servidor)
