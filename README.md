@@ -6,6 +6,8 @@ A menudo, me encuentro en situaciones que requieren flexibilidad y rapidez en el
 
 Mi objetivo es que este kit sirva como un código base que pueda reutilizar en futuros proyectos, facilitando así un desarrollo más ágil y eficiente.
 
+Y ademas me sirva ami como aprendizaje para profundizar en conceptos de angular :)
+
 Casos que voy a ir sumando:
 
 # Text field con prefijo y sufijos
