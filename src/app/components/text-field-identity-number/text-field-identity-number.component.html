@@ -1,5 +1,5 @@
 <mat-form-field>
     <mat-label>Numero de Cuit</mat-label>
     <input type="text" appTextFieldPrefix prefixSeparator="-" [prefixPosition]=2 sufixSeparator="-" [sufixPosition]=1
-        (valuePrefixChanged)="onValueChanged($event)" matInput>
+        (valuePrefixChanged)="onValueChanged($event)" appTextFieldLimitMinMax [maxApp]=13 matInput>
 </mat-form-field>
