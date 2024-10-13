@@ -8,7 +8,6 @@ export class TextFieldLimitMinMaxDirective {
 
     @Input() minApp!: number;
     @Input() maxApp!: number;
-    @Output() valueMinMaxchanged = new EventEmitter<string>();
 
     constructor(private element: ElementRef) { }
 
@@ -23,11 +22,4 @@ export class TextFieldLimitMinMaxDirective {
 
         this.element.nativeElement.value = value;
     }
-
-    @HostListener('focus', ['$event.target.value'])
-    handleFocus(value: string) {
-        console.log(value)
-    }
-
-
 }
