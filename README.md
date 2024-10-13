@@ -8,6 +8,8 @@ Mi objetivo es que este kit sirva como un código base que pueda reutilizar en f
 
 Y ademas me sirva ami como aprendizaje para profundizar en conceptos de angular :)
 
+Por ultimo, (es lo ultimo) me gustaria armar una interfaz donde pueda seleccionar todas las validaciónes que deseo aplicar a un input y que luego me devuelva el codigo, algo asi como un tools de inputs con validaciónes que se vayan agregando y luego copiarlo y utilizarlo en mis proyectos :D
+
 Casos que voy a ir sumando:
 
 # Text field con prefijo y sufijos
