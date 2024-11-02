@@ -5,7 +5,12 @@
     "projects": {
         "builder-text-field": {
             "projectType": "application",
-            "schematics": {},
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "css",
+                    "changeDetection": "OnPush"
+                }
+            },
             "root": "",
             "sourceRoot": "src",
             "prefix": "app",
@@ -16,9 +21,7 @@
                         "outputPath": "dist/builder-text-field",
                         "index": "src/index.html",
                         "browser": "src/main.ts",
-                        "polyfills": [
-                            "zone.js"
-                        ],
+                        "polyfills": [],
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
                             "src/favicon.ico",
@@ -75,10 +78,7 @@
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "polyfills": [
-                            "zone.js",
-                            "zone.js/testing"
-                        ],
+                        "polyfills": [],
                         "tsConfig": "tsconfig.spec.json",
                         "assets": [
                             "src/favicon.ico",

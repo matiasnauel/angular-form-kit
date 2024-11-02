@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { TextFieldPrefixDirective } from '../../directive/text-field-prefix.directive';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextFieldLimitMinMaxDirective } from '../../directive/text-field-limit-min-max.directive';
 
 @Component({
@@ -14,7 +14,9 @@ import { TextFieldLimitMinMaxDirective } from '../../directive/text-field-limit-
         MatInputModule,
         MatButtonModule,
         TextFieldPrefixDirective,
-        TextFieldLimitMinMaxDirective
+        TextFieldLimitMinMaxDirective,
+        FormsModule,
+        ReactiveFormsModule
     ],
     templateUrl: './text-field-identity-number.component.html',
     styleUrl: './text-field-identity-number.component.css'

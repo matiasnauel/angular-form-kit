@@ -4,6 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { TextFieldIdentityNumberComponent } from "./components/text-field-identity-number/text-field-identity-number.component";
+import { DataTableComponent } from "./components/data-table/data-table.component";
 
 @Component({
     selector: 'app-root',
@@ -13,7 +14,8 @@ import { TextFieldIdentityNumberComponent } from "./components/text-field-identi
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        TextFieldIdentityNumberComponent
+        TextFieldIdentityNumberComponent,
+        DataTableComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'

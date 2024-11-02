@@ -11,7 +11,9 @@ export class TextFieldPrefixDirective {
     @Input() sufixPosition!: number;
     @Output() valuePrefixChanged = new EventEmitter<string>();
 
-    constructor(private element: ElementRef) { }
+    constructor(
+        private element: ElementRef
+    ) { }
 
 
     @HostListener('input', ['$event.target.value'])
@@ -33,7 +35,7 @@ export class TextFieldPrefixDirective {
 
             this.element.nativeElement.value = value;
 
-            this.valuePrefixChanged.emit(value);
+            this.valuePrefixChanged.emit(value.replace(this.prefixSeparator, ''));
         }
     }
 
@@ -54,7 +56,7 @@ export class TextFieldPrefixDirective {
 
                 this.element.nativeElement.value = value;
 
-                this.valuePrefixChanged.emit(value);
+                this.valuePrefixChanged.emit(value.replace(this.sufixSeparator, ''));
             }
         }
     }

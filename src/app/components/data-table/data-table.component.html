@@ -1,0 +1,90 @@
+<ng-container>
+    <div class="p-10" style="max-width: 1200px; margin:auto; padding:20px">
+        <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef style="max-width: 80px;">
+                    <mat-checkbox (change)="toggleSelectAll($event.checked)" style="width: 10px"></mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" style="max-width: 80px">
+                    <mat-checkbox (click)="selectRow(row, $event)" [checked]="isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+                <tr *matHeaderCellDef>
+                    <div class="data-table-header-cell">
+                        <div>
+                            <span>N°</span>
+                        </div>
+                        <hr class="data-table-header-cell-color">
+                        <div>
+                            <input class="data-table-input-header">
+                        </div>
+                    </div>
+                </tr>
+                <mat-cell [ngClass]="{'selected-row': isSelected(element)}" (click)="selectRow(element, $event)"
+                    (mousedown)="selectRow(element, $event)" *matCellDef="let element">
+                    {{element.position}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>
+                    <div class="data-table-header-cell">
+                        <div>
+                            <span>Name</span>
+                        </div>
+                        <hr class="data-table-header-cell-color">
+                        <div>
+                            <input class="data-table-input-header">
+                        </div>
+                    </div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="editingRow !== element || editingColumn !== 'name'; else editTemplateName">
+                        <span [ngClass]="{'selected-row': isSelected(element)}" (mousedown)="selectRow(element, $event)"
+                            (dblclick)="startEdit(element, 'name')">
+                            {{element.name}}
+                        </span>
+                    </ng-container>
+                    <ng-template #editTemplateName>
+                        <input [(ngModel)]="newValue" (blur)="saveEdit()" (keydown.enter)="saveEdit()"
+                            (keydown.escape)="cancelEdit()" style="color: black;" />
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+                <mat-header-cell *matHeaderCellDef>
+                    <div class="data-table-header-cell">
+                        <div>
+                            <span>Weight</span>
+                        </div>
+                        <hr class="data-table-header-cell-color">
+                        <div>
+                            <input class="data-table-input-header">
+                        </div>
+                    </div>
+                </mat-header-cell>
+                <mat-cell [ngClass]="{'selected-row': isSelected(element)}" (mousedown)="selectRow(element, $event)"
+                    *matCellDef="let element">
+                    {{element.weight}} </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+                <mat-cell [ngClass]="{'selected-row': isSelected(element)}" (mousedown)="selectRow(element, $event)"
+                    *matCellDef="let element">
+                    {{element.symbol}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'selected-row': isSelected(row)}"
+                (mousedown)="selectRow(row, $event)"></mat-row>
+        </mat-table>
+    </div>
+</ng-container>
