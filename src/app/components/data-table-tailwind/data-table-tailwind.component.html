@@ -1,12 +1,16 @@
 <div class="font-sans overflow-auto">
     <div class="min-w-[600px] grid grid-cols-1 w-full gap-y-4">
-        <div>
+        <div class="flex justify-between">
             <div class="flex items-center gap-1">
                 <label for="filtros">Filtros</label>
                 <span class="material-icons cursor-pointer" (click)="toggleFilters()">
                     {{ filtersVisible ? 'visibility_off' : 'visibility' }}
                 </span>
             </div>
+            <button (click)="exportToExcel()" class="flex items-center bg-blue-500 text-white px-4 py-2 rounded">
+                <span class="material-icons mr-2">file_download</span>
+                Exportar a Excel
+            </button>            
         </div>
         <div>
             <div class="flex rounded-tr-lg rounded-tl-lg shadow p-4 bg-black text-white font-medium gap-x-5">

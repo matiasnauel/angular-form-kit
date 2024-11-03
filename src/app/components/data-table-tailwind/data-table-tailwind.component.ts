@@ -30,8 +30,9 @@ interface Item {
 })
 export class DataTableTailwindComponent {
     [x: string]: any;
-    activeSortColumn: string | null = null;
+    activeSortColumn!: string;
     sortAscending: boolean = true;
+    dropdownOpen = false
 
     columnas: Column[] = [
         { nombre: "Id", tipo: "number" },
@@ -81,12 +82,25 @@ export class DataTableTailwindComponent {
     }
 
     getFilteredItems() {
-        return this.items.filter(item => {
-            return this.columnas.every(col => {
-                const filterValue = this.filters[col.nombre.toLowerCase()]?.toLowerCase() || '';
-                return item[col.nombre.toLowerCase()].toString().toLowerCase().includes(filterValue);
+        let filteredItems = this.items.filter(item => {
+            return Object.keys(this.filters).every(key => {
+                return item[key] && item[key].toString().toLowerCase().includes(this.filters[key].toLowerCase());
             });
         });
+    
+        // Ordenar los elementos
+        if (this.activeSortColumn) {
+            filteredItems.sort((a, b) => {
+                const aValue = a[this.activeSortColumn.toLowerCase()];
+                const bValue = b[this.activeSortColumn.toLowerCase()];
+    
+                if (aValue < bValue) return this.sortAscending ? -1 : 1;
+                if (aValue > bValue) return this.sortAscending ? 1 : -1;
+                return 0;
+            });
+        }
+    
+        return filteredItems;
     }
 
     updatePaginatedItems() {
@@ -114,6 +128,13 @@ export class DataTableTailwindComponent {
             this.updatePaginatedItems();
         }
     }
+
+    exportToExcel() {
+        // Lógica para exportar a Excel
+        console.log("Exportando a Excel");
+        this.dropdownOpen = false; // Cerrar el desplegable después de seleccionar
+    }
+
 
     get totalPages(): number {
         return Math.ceil(this.totalItems / this.itemsPerPage);
