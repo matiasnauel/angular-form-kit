@@ -29,8 +29,10 @@ interface Item {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataTableTailwindComponent {
+    [x: string]: any;
     activeSortColumn: string | null = null;
     sortAscending: boolean = true;
+
     columnas: Column[] = [
         { nombre: "Id", tipo: "number" },
         { nombre: "Nombre", tipo: "text" },
@@ -48,9 +50,25 @@ export class DataTableTailwindComponent {
         { id: 5, nombre: "Producto E", descripcion: "Descripción del producto E", cantidad: 30, estado: "activo" },
     ];
 
+    itemsPerPage: number = 10;
+    currentPage: number = 1;
+    totalItems: number = this.items.length;
+    paginatedItems: any[] = [];
+    filtersVisible = false;
+    filters: { [key: string]: string } = {}
+
+    constructor() {
+        this.updatePaginatedItems();
+    }
+
+
     getWidthClass(width?: string | null): string {
         if (!width) return 'w-full';
         return `sm:w-${width} md:w-${width} lg:w-${width}`;
+    }
+
+    toggleFilters() {
+        this.filtersVisible = !this.filtersVisible;
     }
 
     toggleSortOrder(column: string) {
@@ -60,5 +78,44 @@ export class DataTableTailwindComponent {
             this.activeSortColumn = column;
             this.sortAscending = true;
         }
+    }
+
+    getFilteredItems() {
+        return this.items.filter(item => {
+            return this.columnas.every(col => {
+                const filterValue = this.filters[col.nombre.toLowerCase()]?.toLowerCase() || '';
+                return item[col.nombre.toLowerCase()].toString().toLowerCase().includes(filterValue);
+            });
+        });
+    }
+
+    updatePaginatedItems() {
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        this.paginatedItems = this.items.slice(startIndex, startIndex + this.itemsPerPage);
+    }
+
+    nextPage() {
+        if (this.currentPage * this.itemsPerPage < this.totalItems) {
+            this.currentPage++;
+            this.updatePaginatedItems();
+        }
+    }
+
+    previousPage() {
+        if (this.currentPage > 1) {
+            this.currentPage--;
+            this.updatePaginatedItems();
+        }
+    }
+
+    goToPage(page: number) {
+        if (page > 0 && page <= Math.ceil(this.totalItems / this.itemsPerPage)) {
+            this.currentPage = page;
+            this.updatePaginatedItems();
+        }
+    }
+
+    get totalPages(): number {
+        return Math.ceil(this.totalItems / this.itemsPerPage);
     }
 }
